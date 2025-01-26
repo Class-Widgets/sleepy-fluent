@@ -1,7 +1,7 @@
 > [!NOTE]
 > 源项目地址：[wyf9/sleepy](https://github.com/wyf9/sleepy)
 
-# sleepy-nextgen 
+# sleepy-nextgen
 
 一个 ~~用于视奸~~ 查看个人（RinLit）在线状态 (以及正在使用软件) 的 Flask 网站，让他人能知道你不在而不是故意吊他/她
 
@@ -15,7 +15,7 @@
 
 ### TODO
 
-- [x] **拆分 `config.json` (只读) 和 `data.json`** (https://github.com/wyf9/sleepy/issues/3)
+- [x] **拆分 `data/config.json` (只读) 和 `data/data.json`** (https://github.com/wyf9/sleepy/issues/3)
 - [x] 网页使用 api 请求，并实现定时刷新
 - [x] 设备使用状态
 - [x] Windows 客户端 (Python)
@@ -24,6 +24,8 @@
 - [ ] 设备状态尝试 Websocket (=↓)
 - [ ] 设备状态 Heartbeat 机制
 - [ ] 更多状态存储选项 (如 SQLite)
+- [ ] docker 使用 ghcr 仓库
+- [ ] 完善 docker 相关的文档，如时间/权限问题
 
 > [!TIP]
 > 因上学原因 ***(临近期末)***, 可能放缓更新 <br/>
@@ -40,8 +42,51 @@
 
 ## 部署
 
+### Docker
+
+> [!WARRING] WIP
+
+克隆仓库
+
+```bash
+git clone http://github.com/wyf9/sleepy.git
+```
+
+构建镜像
+
+```bash
+docker build -t <name>:<version> .
+```
+
+创建配置文件，随便找一个你记得住的位置创建 `config.json` 和 `data.json`。
+其中 `config.json` 根据 `example.jsonc` 创建，并删除注释。
+`data.json` 因为还在制作的原因需要在 `data.py` 中复制 `initJson` 函数。
+
+```bash
+cd <your_path>
+cp <repo_dir>/example.jsonc config.json
+<your_editor> config.json
+<< EOF > data.json
+{
+  "status": 0,
+  "device_status": {},
+  "last_updated": "1970-01-01 08: 00: 00"
+}
+EOF
+```
+
+随后将你的目录挂载到镜像的 `/app/data` 下，并指定后台运行、端口号和名称。
+
+```bash
+docker run -d -p <output_port>:9010 -v <your_path>:/app/data --name <app_name> <name>:<version>
+```
+
+后续更新、停止、删除等操作详见 docker 文档。
+
+### shell
+
 > 从旧版本更新? 请看 [config.json 更新记录](./doc/config_json_update.md) <br/>
-> *配置文件已从 `data.json` 更名为 `config.json`*
+> *配置文件已从 `data.json` 更名为 `data/config.json`*
 
 理论上全平台通用, 安装了 Python >= **3.6** 即可 (建议: **3.10+**)
 

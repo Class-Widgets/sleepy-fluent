@@ -34,14 +34,14 @@ class data:
     data_check_interval: int
 
     def __init__(self):
-        if not os.path.exists('data.json'):
+        if not os.path.exists('data/data.json'):
             u.info('Could not find data.json, creating.')
             initJson()
         try:
             self.loads()
         except Exception as e:
             u.warning(f'Error when loading data: {e}, try re-create')
-            os.remove('data.json')
+            os.remove('data/data.json')
             initJson()
             self.load()
     def load(self, ret: bool = False) -> dict:
@@ -52,7 +52,7 @@ class data:
 
         :param ret: 是否返回加载后的 dict (为否则设置 self.data)
         '''
-        with open('data.json', 'r', encoding='utf-8') as file:
+        with open('data/data.json', 'r', encoding='utf-8') as file:
             Data = json.load(file)
             if ret:
                 return Data

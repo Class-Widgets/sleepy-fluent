@@ -341,7 +341,7 @@ def clear_device():
 @app.route('/reload_config')
 def reload_config():
     '''
-    从 `config.json` 重载配置
+    从 `data/config.json` 重载配置
     - Method: **GET**
     '''
     showip(request, '/reload_config')
@@ -363,7 +363,7 @@ def reload_config():
 @app.route('/save_data')
 def save_data():
     '''
-    保存内存中的状态信息到 `data.json`
+    保存内存中的状态信息到 `data/data.json`
     - Method: **GET**
     '''
     showip(request, '/save_data')

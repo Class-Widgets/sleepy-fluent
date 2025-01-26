@@ -30,8 +30,8 @@ class config:
     config: dict
 
     def __init__(self):
-        if not os.path.exists('config.json'):
-            u.warning('config.json not exist, creating')
+        if not os.path.exists('data/config.json'):
+            u.warning('data/config.json not exist, creating')
             initJson()
         self.loads()
     def load(self):
@@ -40,7 +40,7 @@ class config:
         '''
         加载配置
         '''
-        with open('config.json', 'r', encoding='utf-8') as file:
+        with open('data/config.json', 'r', encoding='utf-8') as file:
             self.config = json.load(file)
 
     # def save(self):

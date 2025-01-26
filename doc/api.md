@@ -329,7 +329,7 @@ https://github.com/wyf9/sleepy/blob/main/server.py#L16
 
 > `/save_data?secret=<secret>`
 
-保存内存中的状态信息到 `data.json`
+保存内存中的状态信息到 `data/data.json`
 
 * Method: GET
 

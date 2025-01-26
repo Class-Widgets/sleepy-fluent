@@ -1,0 +1,16 @@
+# python
+__pycache__/
+/.venv
+
+# config
+data.json
+data.*.json
+config.json
+config.*.json
+*.test.*
+
+# others
+/doc
+.gitignore
+README.md
+vercel.json
